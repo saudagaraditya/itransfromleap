@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel</title>
+</head>
+<body>
+    <h1>Admin Panel</h1>
+    <table border="1">
+        <tr>
+            <th>User</th>
+            <th>Question</th>
+            <th>Selected Option</th>
+        </tr>
+        {% for response in responses %}
+        <tr>
+            <td>{{ response.user_name }}</td>
+            <td>{{ response.question }}</td>
+            <td>{{ response.selected_option }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

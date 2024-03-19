@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #d3d3d3;
+            margin: 0;
+            padding: 0;
+        }
+
+        img {
+        max-width: 500px; 
+        height: 200px;
+        display: block; 
+        margin: 0 auto 20px; 
+        border-radius: 10px; 
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        ul {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        input[type="submit"] {
+            background-color: #24de30b1;
+            color: #0f0202;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #33b300e7;
+        }
+    </style>
+    <script>
+        function confirmStartTest() {
+            // Show a confirmation dialog
+            var confirmed = confirm("Are you sure you want to start the test?");
+            // If user confirms, submit the form
+            if (confirmed) {
+                document.getElementById("start-test-form").submit();
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <img src="{% static 'images/itransform.jpeg' %}" alt="Your Image Description">
+        <h1>Welcome to the itransformleap</h1>
+        <p>Please rate your responses to the following questions on a scale from 0 to 10, indicating your level of agreement or disagreement as:</p>
+        <ul>
+            <li>10: Fully Agree/Aware</li>
+            <li>6: Somewhat Agree/Aware</li>
+            <li>4: Very little agree/aware</li>
+            <li>0: Missing</li>
+        </ul>
+        <p>Click the button below to proceed to the test</p>
+        <form id="start-test-form" action="{% url 'questionnaire' %}" method="GET">
+            <input type="submit" value="Start test" onclick="confirmStartTest()">
+        </form>
+    </div>
+</body>
+</html>

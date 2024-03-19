@@ -1,0 +1,122 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questionnaire</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1{
+            text-align: center;
+        }
+        
+        .form-box {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        input[type="text"], input[type="radio"] {
+            margin-bottom: 10px;
+        }
+        
+        input[type="text"] {
+            width: 50%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        
+        p {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        input[type="radio"] {
+            margin-right: 5px;
+            vertical-align: middle;
+        }
+        
+        button[type="submit"] {
+            background-color: #38df05fd;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            
+        }
+
+        img {
+        max-width: 1000px; 
+        height: 180px;
+        display: flex; 
+        margin: 0 auto 20px; 
+        border-radius: 10px; 
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        button[type="submit"]:hover {
+            background-color: #06c53f;
+            
+        }
+
+        .center {
+            text-align: center;
+        }
+    </style>
+    <script>
+        function confirmStartTest() {
+            // Show a confirmation dialog
+            var confirmed = confirm("Are you sure you want to submit the test?");
+            // If user confirms, submit the form
+            if (confirmed) {
+                document.getElementById("start-test-form").submit();
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        
+        <div class="form-box">
+            <img src="{% static 'images/itransform.jpeg' %}" alt="Your Image Description">
+            <form method="post">
+                {% csrf_token %}
+                <h1>Entrepreneur’s score card</h1>
+                <div class="form-group">
+                    <label for="user">Enter your name:</label><br>
+                    <input type="text" id="user" name="user" placeholder="Enter your name" required><br>
+                </div>
+                {% for question in questions %}
+                <div class="question">
+                    <p> Q.{{ forloop.counter }} {{ question.text }}</p>
+                    {% for option in options %}
+                    <input type="radio" name="question_{{ question.id }}" value="{{ option.id }}" required> {{ option.text }} ({{ option.marks }})<br>
+                    {% endfor %}
+                </div>
+                {% endfor %}
+                <div class="center">
+                    <button type="submit" onclick="confirmStartTest()">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
