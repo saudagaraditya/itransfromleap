@@ -4,7 +4,9 @@ from django.db.models import Sum
 
 
 class ResponseAdmin(admin.ModelAdmin):
-    list_display = ('user', 'get_total_score','question','option')  # Add 'get_total_score' to list_display
+    list_display = ('user', 'get_total_score','question','option')
+    list_filter = ('user',)  # Add 'get_total_score' to list_display
+    search_fields = ('user',)
 
     def get_total_score(self, obj):
         # Retrieve the total score for each user by aggregating the scores of distinct responses
